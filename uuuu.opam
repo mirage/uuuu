@@ -1,0 +1,31 @@
+opam-version: "1.2"
+name:         "uuuu"
+maintainer:   "Romain Calascibetta <romain.calascibetta@gmail.com>"
+authors:      "Romain Calascibetta <romain.calascibetta@gmail.com>"
+homepage:     "https://github.com/dinosaure/uuuu"
+bug-reports:  "https://github.com/dinosaure/uuuu/issues"
+dev-repo:     "https://github.com/dinosaure/uuuu.git"
+doc:          "https://dinosaure.github.io/uuuu/"
+license:      "MIT"
+
+build: [
+  ["jbuilder" "subst" "-n" name] {pinned}
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
+build-test: [["jbuilder" "runtest" "-p" name "-j" jobs]]
+
+depends: [
+  "jbuilder" {build & >="1.0+beta9"}
+  "fmt"
+  "bos"       {>= "0.2.0"}
+  "menhir"
+  "ppx_tools"
+  "rresult"
+  "cmdliner"
+  "ptmap"
+  "angstrom"  {>= "0.9.0"}
+  "emile"     {>= "0.3"}
+  "uri"
+]
+
+available: [ocaml-version >= "4.03.0"]
