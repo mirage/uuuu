@@ -94,7 +94,7 @@ let table = function
   | `ISO_8859_15 -> ISO_8859_15.map
   | `ISO_8859_16 -> ISO_8859_16.map
 
-let malformed cp_iso8859 cp_unicode = `Malformed (strf "Byte %02x does not map on a valid unicode value %04x" cp_iso8859 cp_unicode)
+let malformed kind byte = `Malformed (strf "Byte %02x is not a valid %s codepoint" byte (encoding_to_string kind))
 
 let uchar ucp = `Uchar (Uchar.of_int ucp)
 
@@ -104,18 +104,13 @@ let unsafe_byte source off pos =
 let r kind source off pos =
   (* XXX(dinosaure): assert (0 <= off && 0 < pos && off + pos < Bytes.length source) *)
 
-  pp Format.std_formatter "> r %s #source:(len:%d) %d %d\n%!"
-    (encoding_to_string kind) (Bytes.length source) off pos;
-
   try let byte = unsafe_byte source off pos in
       let code = (table kind).(byte) in
 
-      (* XXX(dinosaure): if we have (-1), code is US-ASCII code. *)
-      if code = -1 then uchar byte else uchar code
+      if code = -1 then malformed kind byte else uchar code
   with Invalid_argument _ ->
-    let cp_iso8859 = unsafe_byte source off pos in
-    let cp_unicode = (table kind).(cp_iso8859) in
-    malformed cp_iso8859 cp_unicode
+    let byte = unsafe_byte source off pos in
+    malformed kind byte
 
 (* Decode *)
 
