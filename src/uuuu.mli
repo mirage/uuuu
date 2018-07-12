@@ -34,3 +34,16 @@ val decoder_byte_count: 'kind decoder -> int
 val decoder_count: 'kind decoder -> int
 val decoder_src: 'kind decoder -> src
 val decoder_kind: 'kind decoder -> 'kind
+
+module Char: sig
+  val is_valid: encoding -> char -> bool
+  val equal: encoding -> char -> char -> bool
+  val compare: encoding -> char -> char -> int
+  val unicode: encoding -> char -> Uchar.t
+end
+
+module String: sig
+  type 'a folder = 'a -> int -> [ `Malformed of string | `Uchar of Uchar.t ] -> 'a
+
+  val fold: encoding -> ?off:int -> ?len:int -> 'a folder -> 'a -> string -> 'a
+end

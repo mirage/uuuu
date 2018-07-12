@@ -101,6 +101,10 @@ let uchar ucp = `Uchar (Uchar.of_int ucp)
 let unsafe_byte source off pos =
   Char.code (Bytes.unsafe_get source (off + pos))
 
+let unsafe_bytes_iteri f s =
+  let l = Bytes.length s in
+  for i = 0 to l - 1 do f i (unsafe_byte s 0 i) done
+
 let r kind source off pos =
   (* XXX(dinosaure): assert (0 <= off && 0 < pos && off + pos < Bytes.length source) *)
 
@@ -255,3 +259,42 @@ let decoder_byte_count decoder = decoder.byte_count
 let decoder_count decoder = decoder.count
 let decoder_src decoder = decoder.src
 let decoder_kind decoder = decoder.kind
+
+module Char = struct
+  let is_valid kind byte =
+    let code = Char.code byte in
+    if (table kind).(code) = -1 then false else true
+
+  let equal _kind = Char.equal
+  let compare _kind = Char.compare
+
+  let unicode kind byte =
+    let code = Char.code byte in
+    let unicode = (table kind).(code) in
+    if unicode = -1
+    then invalid_arg "Byte %02x is not a valid %s codepoint" code (encoding_to_string kind);
+    Uchar.of_int unicode
+end
+
+module String = struct
+  type 'a folder = 'a -> int -> [ `Malformed of string | `Uchar of Uchar.t ] -> 'a
+
+  let fold kind ?off ?len folder acc str =
+    let off, len = match off, len with
+      | Some off, Some len -> off, len
+      | None, Some len -> 0, len
+      | Some off, None -> off, String.length str - off
+      | None, None -> 0, String.length str in
+    let acc = ref acc in
+    let go idx byte =
+      let unicode = (table kind).(byte) in
+
+      let res =
+        if unicode = -1
+        then malformed kind byte
+        else uchar unicode in
+
+      acc := folder !acc idx res in
+      unsafe_bytes_iteri go (Bytes.unsafe_of_string (String.sub str off len))
+    ; !acc
+end
