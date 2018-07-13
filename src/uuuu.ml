@@ -161,7 +161,7 @@ let src decoder source off len =
   else ( decoder.i <- source
        ; decoder.i_off <- off
        ; decoder.i_pos <- 0
-       ; decoder.i_len <- len)
+       ; decoder.i_len <- len - 1)
 
 let refill k decoder = match decoder.src with
   | `Manual -> decoder.k <- k; `Await
