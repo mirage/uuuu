@@ -17,9 +17,12 @@ build-test: [["jbuilder" "runtest" "-p" name "-j" jobs]]
 depends: [
   "jbuilder" {build}
   "fmt"
+  "bos"
   "uutf"
+  "ptmap"
   "menhir"
   "rresult"
+  "angstrom"
   "cmdliner"
 ]
 
