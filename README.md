@@ -2,7 +2,7 @@
 ===================================================
 
 Uhuhuhuhuhuh! `uuuu` (Universal Unifier to Unicode Un OCaml) is a little library to normalize an ISO-8859 input to
-UTF-8. This library uses tables provided by the Unicode Consortium:
+Unicode. This library uses tables provided by the Unicode Consortium:
 
 https://ftp.unicode.org/Public/MAPPINGS/ISO8859/
 
