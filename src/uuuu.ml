@@ -220,7 +220,7 @@ let pp_iso_8859 decoder = function
     ; ncount decoder
     ; nline decoder
     ; v
-    | (0x0085 | 0x000C | 0x2028 | 0x2029) (* NEL | FF | lS | PS *) ->
+    | (0x0085 | 0x000C | 0x2028 | 0x2029) (* NEL | FF | LS | PS *) ->
       cr decoder false
     ; ncount decoder
     ; nline decoder
