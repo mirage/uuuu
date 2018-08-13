@@ -1,8 +1,7 @@
 (menhir
  ((modules (format_a_parser))))
 
-(ocamllex
- ((modules (format_a_lexer))))
+(ocamllex (format_a_lexer))
 
 (executable
  ((name generate)
