@@ -9,13 +9,14 @@ doc:          "https://dinosaure.github.io/uuuu/"
 license:      "MIT"
 
 build: [
-  ["jbuilder" "subst" "-n" name] {pinned}
+  ["jbuilder" "subst" "-p" name] {pinned}
   ["jbuilder" "build" "-p" name "-j" jobs]
 ]
 build-test: [["jbuilder" "runtest" "-p" name "-j" jobs]]
 
 depends: [
   "jbuilder" {build}
+  "re" {>= "1.7.2"}
   "fmt"
   "bos"
   "uutf"
