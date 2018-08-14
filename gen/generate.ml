@@ -13,9 +13,9 @@ let pp_array ppf lst =
 
 let produce oc database =
   let ppf = Format.formatter_of_out_channel oc in
-  let res = Array.init 256 (fun idx -> match Ptmap.find_opt idx database with
-      | Some (cp, _) -> cp
-      | None -> (-1)) |> Array.to_list in
+  let res = Array.init 256 (fun idx -> match Ptmap.find idx database with
+      | (cp, _) -> cp
+      | exception Not_found -> (-1)) |> Array.to_list in
   Fmt.pf ppf "let map = %a\n%!" pp_array res; Ok ()
 
 let parse source destination =
