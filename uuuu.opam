@@ -16,7 +16,7 @@ build-test: [["jbuilder" "runtest" "-p" name "-j" jobs]]
 
 depends: [
   "jbuilder" {build}
-  "re" {>= "1.7.2"}
+  "re" {test & >= "1.7.2"}
   "fmt"
   "bos"
   "uutf"
