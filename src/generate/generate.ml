@@ -32,7 +32,7 @@ let () =
       | _ -> error ()
     with _ -> error () in
 
-  let files = Array.to_list (Sys.readdir database) in
+  let files = List.sort String.compare (Array.to_list (Sys.readdir database)) in
   let out = open_out output |> Format.formatter_of_out_channel in
 
   List.map (make_rule database) files |> List.iter (Fmt.(pf out) "%s\n\n%!")
