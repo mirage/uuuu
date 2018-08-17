@@ -57,22 +57,10 @@ val decode: 'kind decoder -> decode
     {b Note.} Repeated invocation always eventually returns [`End], even
     in case of errors. *)
 
-val decoder_line: 'kind decoder -> int
-(** [decoder_line d] is the line number of the last decoded (or malformed)
-   character. See {!decoder} for details. *)
-
-val decoder_column: 'kind decoder -> int
-(** [decoder_column d] is the column number of the last decoder (or malformed)
-   character. See {!decoder} for details. *)
-
 val decoder_byte_count: 'kind decoder -> int
 (** [decoder_byte_count d] is the number of characters already decoder on [d]
    (including malformed ones). This is the last {!decode}'s and byte offset
    counting from beginning of the stream. *)
-
-val decoder_count: 'kind decoder -> int
-(** [decoder_count d] is the number of characters already decoded on [d]
-   (including malformed ones). See {!decoder} for details. *)
 
 val decoder_src: 'kind decoder -> src
 (** [decoder_src d] is [d]'s input source. *)
