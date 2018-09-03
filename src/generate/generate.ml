@@ -15,9 +15,9 @@ let make_rule database name =
 
   Fmt.strf
     "(rule \
-      ((targets (%s))
-       (deps (%s))
-       (action (run ${exe:../gen/generate.exe} %s %s))))"
+      (targets %s)
+      (deps (:gen ../gen/generate.exe) %s)
+      (action (run %%{gen} %s %s)))"
     ml_file (database / txt_file) (database / txt_file) ml_file
 
 let error () =
