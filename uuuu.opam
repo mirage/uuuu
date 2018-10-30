@@ -1,22 +1,23 @@
-opam-version: "1.2"
+opam-version: "2.0"
 name:         "uuuu"
 maintainer:   "Romain Calascibetta <romain.calascibetta@gmail.com>"
 authors:      "Romain Calascibetta <romain.calascibetta@gmail.com>"
 homepage:     "https://github.com/dinosaure/uuuu"
 bug-reports:  "https://github.com/dinosaure/uuuu/issues"
-dev-repo:     "https://github.com/dinosaure/uuuu.git"
+dev-repo:     "git+https://github.com/dinosaure/uuuu.git"
 doc:          "https://dinosaure.github.io/uuuu/"
 license:      "MIT"
+synopsis:     "Mapper of ISO-8859-* to Unicode"
 
 build: [
-  ["dune" "subst"] {pinned}
+  ["dune" "subst"]
   ["dune" "build" "-p" name "-j" jobs]
 ]
-build-test: [["dune" "runtest" "-p" name "-j" jobs]]
 
 depends: [
+  "ocaml" {>= "4.03.0"}
   "dune" {build}
-  "re" {test & >= "1.7.2"}
+  "re" {>= "1.7.2"}
   "fmt"
   "bos"
   "uutf"
@@ -26,5 +27,3 @@ depends: [
   "angstrom"
   "cmdliner"
 ]
-
-available: [ocaml-version >= "4.03.0"]
