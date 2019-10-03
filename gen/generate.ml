@@ -6,6 +6,7 @@ let of_file path =
     (Format_a_parser.file, Format_a_lexer.token)
 
 open Rresult
+module Map = Iso8859.Map
 
 let pp_array ppf lst =
   let sep = Fmt.const Fmt.string ";" in
@@ -13,7 +14,7 @@ let pp_array ppf lst =
 
 let produce oc database =
   let ppf = Format.formatter_of_out_channel oc in
-  let res = Array.init 256 (fun idx -> match Ptmap.find idx database with
+  let res = Array.init 256 (fun idx -> match Map.find idx database with
       | (cp, _) -> cp
       | exception Not_found -> (-1)) |> Array.to_list in
   Fmt.pf ppf "let map = %a\n%!" pp_array res; Ok ()

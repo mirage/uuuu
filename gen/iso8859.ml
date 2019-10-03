@@ -14,9 +14,11 @@ struct
     return (Astring.String.trim name, Astring.String.trim value)
 end
 
+module Map = Map.Make(struct type t = code let compare = compare end)
+
 let extract source =
   let _, maps = List.partition Source.is_comment source in
   List.fold_left (fun map -> function
-      | Source.Map { a; b; name; } -> Ptmap.add a (b, (Astring.String.trim name)) map
-      | _ -> assert false) Ptmap.empty maps
+      | Source.Map { a; b; name; } -> Map.add a (b, (Astring.String.trim name)) map
+      | _ -> assert false) Map.empty maps
   |> Rresult.R.ok
