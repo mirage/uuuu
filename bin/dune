@@ -1,5 +1,5 @@
 (executable
- (name to_utf8)
+ (name iso8859_to_utf8)
  (package uuuu)
  (public_name uuuu.to_utf8)
  (libraries cmdliner uutf fmt rresult uuuu))
