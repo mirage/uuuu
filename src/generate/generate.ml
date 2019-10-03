@@ -10,7 +10,7 @@ let ( / ) = Filename.concat
 
 let make_rule database name =
   let txt_file = name in
-  let number = Re.(get (exec re name) 1) |> int_of_string in
+  let number = Re.(Group.get (exec re name) 1) |> int_of_string in
   let ml_file = Fmt.strf "ISO_8859_%d.ml" number in
 
   Fmt.strf
