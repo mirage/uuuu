@@ -21,7 +21,6 @@ depends: [
   "fmt"
   "bos"
   "uutf"
-  "ptmap"
   "menhir"
   "rresult"
   "angstrom"
