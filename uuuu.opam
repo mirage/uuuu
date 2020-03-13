@@ -8,6 +8,8 @@ dev-repo:     "git+https://github.com/mirage/uuuu.git"
 doc:          "https://mirage.github.io/uuuu/"
 license:      "MIT"
 synopsis:     "Mapper of ISO-8859-* to Unicode"
+description: """A simple mapper between ISO-8859-* to Unicode. Useful for
+a translation between ISO-8859-* and Unicode"""
 
 build: [
   ["dune" "build" "-p" name "-j" jobs]
