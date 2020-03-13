@@ -7,9 +7,9 @@ let is_comment = function
   | Map _ -> false
 
 let pp ppf = function
-  | Comment comment -> Fmt.pf ppf "%s" comment
+  | Comment comment -> Format.pp_print_string ppf comment
   | Map { a; b; name; } ->
-    Fmt.pf ppf "{@[<hov>a = 0x%02x;@ \
-                b = 0x%04x;@ \
-                name = %s;@]}"
+    Format.fprintf ppf "{@[<hov>a = 0x%02x;@ \
+                                b = 0x%04x;@ \
+                                name = %s;@]}"
       a b name
