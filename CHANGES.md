@@ -1,3 +1,9 @@
+v0.2.0 2020-03-13 Paris (France)
+------------------------------
+
+* Clean the distribution
+* Delete provided binary
+
 v0.1.1 2018-11-08 Paris (France)
 ------------------------------
 
