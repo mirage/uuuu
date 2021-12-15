@@ -5,8 +5,8 @@
 
 (include dune.inc)
 
-(alias
- (name runtest)
+(rule
+ (alias runtest)
  (action (diff dune.inc dune.inc.gen)))
 
 (library
