@@ -1,7 +1,3 @@
-(menhir (modules format_a_parser))
-(ocamllex format_a_lexer)
-
 (executable
  (name generate)
- (public_name uuuu.generate)
- (libraries angstrom))
+ (public_name uuuu.generate))
