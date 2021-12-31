@@ -1,3 +1,10 @@
+v0.3.0 2021-12-30 Paris (France)
+------------------------------
+
+* Add `ocamlfind` as a dependency for `generate/generate.ml` which
+  uses `topfind`
+* Upgrade the code and delete the `menhir` dependency
+
 v0.2.0 2020-03-13 Paris (France)
 ------------------------------
 
