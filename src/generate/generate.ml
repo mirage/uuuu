@@ -1,16 +1,11 @@
-#use "topfind";;
-#require "re";;
-
-let re =
-  let open Re in
-  compile (seq [ str "8859-"; group (rep1 digit); str ".TXT" ])
-
 let ( / ) = Filename.concat
 let invalid_arg fmt = Format.kasprintf invalid_arg fmt
 
 let make_rule database name =
   let txt_file = name in
-  let number = Re.(Group.get (exec re name) 1) |> int_of_string in
+  let off = 5 in
+  let len = String.length name - 4 - off in
+  let number = int_of_string (String.sub name off len) in
   let ml_file = Format.asprintf "ISO_8859_%d.ml" number in
 
   Format.asprintf
