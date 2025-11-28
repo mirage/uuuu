@@ -12,7 +12,7 @@ codepoint.
 
 ## How to use it?
 
-`uuuu` has an _dbuenzli_ interface. So it should be easy to use it and trick on
+`uuuu` has an streaming interface. So it should be easy to use it and trick on
 it. `uuuu` has a simple goal, offer a general way to decode an ISO-8859 input
 and normalize it to unicode codepoints. We need to be able to control
 memory-consumption and ensure to offer a non-blocking computation. Finally, an
@@ -39,28 +39,13 @@ let () = trans stdin stdout
 `uuuu` follows aliases availables into IANA character sets database:
 https://www.iana.org/assignments/character-sets.xhtml
 
-Others aliases will raise an exception. This function is case-insensitive.
-
-### About translation tables
-
-`uuuu` integrates translation tables provided by Unicode consortium. They should
-not be updated - so we statically save then into an `int array`.
-
-### About encoding
-
-`uuuu` supports only decoding to Unicode code-point. A support of encoding is
-not on our plan where people should only use Unicode now.
+Others aliases will raise an exception. This function is case-sensitive.
 
 ### A larger decoder
 
 `uuuu` is a part of a biggest project [rosetta][rosetta] which is a decoder for
 some others encodings. If you want to handle more encodings than ISO-8859, you
 should look into this higher library.
-
-### Distribution
-
-`uuuu` integrates a little binary to translate ISO-8859 flow to UTF-8:
-`uuuu.to_utf8`. It is provided as an example of how to use `uuuu` with `uutf`.
 
 [uutf]: https://github.com/dbuenzli/uutf.git
 [rosetta]: https://github.com/mirage/rosetta.git
